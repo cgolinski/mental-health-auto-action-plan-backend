@@ -32,3 +32,15 @@ if (process.env.NODE_ENV !== 'test') {
     logger.info(`🎧 Listening at http://localhost:${port}/`);
   });
 }
+
+// CAROLINE TODO: works here, how to get it to work in controller file?
+// db.collection('tasks')
+//   .get()
+//   .then(snapshot => {
+//     snapshot.forEach(task => {
+//       console.log(task.id, ':', task.data());
+//     });
+//   })
+//   .catch(err => {
+//     console.log('Error getting tasks', err);
+//   });
