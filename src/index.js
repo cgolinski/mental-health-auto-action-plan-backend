@@ -1,18 +1,20 @@
+require('./db/db.js');
+
 const express = require('express');
 const morgan = require('morgan');
-const admin = require('firebase-admin');
+// const admin = require('firebase-admin');
 
 const router = require('./api');
 const { logger } = require('./utils/logger');
 const { errorHandler } = require('./middleware/error-handler');
-const serviceAccount = require('../firebase-credentials.json');
+// const serviceAccount = require('../firebase-credentials.json');
 
-// initialize firebase store
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// // initialize firebase store
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
-const db = admin.firestore();
+// const db = admin.firestore();
 
 // Create a new express application instance
 const app = express();
@@ -32,15 +34,3 @@ if (process.env.NODE_ENV !== 'test') {
     logger.info(`🎧 Listening at http://localhost:${port}/`);
   });
 }
-
-// CAROLINE TODO: works here, how to get it to work in controller file?
-// db.collection('tasks')
-//   .get()
-//   .then(snapshot => {
-//     snapshot.forEach(task => {
-//       console.log(task.id, ':', task.data());
-//     });
-//   })
-//   .catch(err => {
-//     console.log('Error getting tasks', err);
-//   });
