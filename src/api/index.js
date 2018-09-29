@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 
-const { healthRouter } = require('../routes/health/health.router')
+const { tasksRouter } = require('../routes/tasks/tasks.router');
 
 const router = express.Router();
-router.use("/health", healthRouter);
+router.use('/tasks', tasksRouter);
 
 module.exports = router;
