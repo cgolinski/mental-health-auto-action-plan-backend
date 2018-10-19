@@ -3,30 +3,21 @@ const db = require('../../db/db.js');
 const getTasksController = (req, res) => {
   db.collection('tasks')
     .get()
-    .then(
-      snapshot =>
-        snapshot.forEach(task => {
-          console.log('==============');
-          console.log(task.id, '=>', task.data());
-          return res.json(task.data());
-          // ^ this is only displaying one task.
-          // Why is it a different task for each get request?
-          // How to display all tasks?
-        })
-      // res.send();
-      // ^ how was this supposed to be used?
-    )
+    .then(snapshot => {
+      const snapshotData = [];
+      snapshot.forEach(task => {
+        snapshotData.push(task.data());
+      });
+      return res.json(snapshotData);
+    })
     .catch(err => {
       console.log('Error getting tasks', err);
     });
-
-  // return res.json({
-  //   ok: 'OK',
-  // });
 };
 
 const postTasksController = (req, res) => {
   // logic here to write to firebase
+  // post is currently not working
   db.collection('tasks')
     .add({
       taskSummary: 'Wash dishes',
