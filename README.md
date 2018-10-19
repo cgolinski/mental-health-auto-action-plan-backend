@@ -1,3 +1,7 @@
+## About
+
+Uses Node, Express, and Firebase.
+
 ## Installation
 
 ```sh
