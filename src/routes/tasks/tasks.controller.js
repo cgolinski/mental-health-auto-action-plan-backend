@@ -8,10 +8,11 @@ const getTasksController = (req, res) => {
       snapshot.forEach(task => {
         snapshotData.push(task.data());
       });
-      return res.json(snapshotData);
+      return res.status(200).json(snapshotData);
     })
     .catch(err => {
       console.log('Error getting tasks', err);
+      return res.status(500).send(err);
     });
 };
 
@@ -30,9 +31,11 @@ const postTasksController = (req, res) => {
     })
     .then(docRef => {
       console.log('Document written with ID: ', docRef.id);
+      res.status(201).send(`Document written with ID: ${docRef.id}`);
     })
     .catch(error => {
       console.error('Error adding document: ', error);
+      res.status(500).send(`Error adding document: ${error}`);
     });
 };
 
