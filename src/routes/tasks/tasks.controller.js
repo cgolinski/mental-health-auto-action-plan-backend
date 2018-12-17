@@ -17,11 +17,16 @@ const getTasksController = (req, res) => {
 };
 
 const postTasksController = (req, res) => {
-  // logic here to write to firebase
-  // post is currently not working
+  // writes to firebase
+  console.log(
+    'req rcvd by postTasksController with express.JSON middleware in place:',
+    req
+  );
+  // ^ req.body is undefined
+
   db.collection('tasks')
     .add({
-      taskSummary: 'Wash dishes',
+      taskSummary: 'Wash dishes 10',
       taskDetails: 'Handwash non-stick pans.',
       contact: {
         email: 'noemail@example.com',
@@ -31,7 +36,10 @@ const postTasksController = (req, res) => {
     })
     .then(docRef => {
       console.log('Document written with ID: ', docRef.id);
-      res.status(201).send(`Document written with ID: ${docRef.id}`);
+      res.status(201).send({
+        taskId: docRef.id,
+        // TODO CAROLINE: add the rest of the entry that was posted to db
+      });
     })
     .catch(error => {
       console.error('Error adding document: ', error);
