@@ -16,13 +16,11 @@ const app = express();
 const port = process.env.PORT || 8081;
 
 logger.info('🤖 Initializing middleware');
-
 app.use(morgan('tiny', { stream: logger.stream }));
+app.use(express.json());
+// ^ appends body to req
 app.use('/', router);
 app.use(errorHandler);
-
-// this v is supposed to automatically append body to req. req.body. But not working.
-app.use(express.json());
 
 // Serve the application at the given port
 if (process.env.NODE_ENV !== 'test') {

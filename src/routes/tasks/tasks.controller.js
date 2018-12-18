@@ -19,10 +19,9 @@ const getTasksController = (req, res) => {
 const postTasksController = (req, res) => {
   // writes to firebase
   console.log(
-    'req rcvd by postTasksController with express.JSON middleware in place:',
-    req
+    'req.body rcvd by postTasksController with express.JSON middleware in place:',
+    req.body
   );
-  // ^ req.body is undefined
 
   db.collection('tasks')
     .add({
