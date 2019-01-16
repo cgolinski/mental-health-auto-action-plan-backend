@@ -25,6 +25,8 @@ $ yarn start
 Middleware functions are functions that have access to the request object (`req`), the response object (`res`), and the next middleware function in the application’s request-response cycle.
 
 Middleware can be at the application level or at the router level.
+Deployed at: https://mentalhealth-autoactionplan-be.herokuapp.com
+Basic get: https://mentalhealth-autoactionplan-be.herokuapp.com/tasks
 
 ## Database
 
