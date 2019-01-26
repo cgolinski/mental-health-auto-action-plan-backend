@@ -1,18 +1,16 @@
 ## TO DO
 
+- In production env (.env) of FE, instead of localhost, call deployed BE URL. Will give CORS error. So on BE, have to say that from my FE URL requests are ok.
+- The behavior for Date objects stored in Firestore is going to change. Add the
+  following code to your app before calling any other Cloud Firestore methods:
+  const firestore = new Firestore();
+  const settings = {/_ your settings... _/ timestampsInSnapshots: true};
+  firestore.settings(settings);
+
 ### DEFECTS
 
 ### FEATURES
 
 ### TECH DEBT
 
-- Delete the extra branch I pushed to heroku. Only want heroku to have master.
-
 ### QUESTIONS
-
-- When I log the keys of process.env locally
-
-  - Why doesn’t include process.env.NODE_ENV?
-  - Why does it include “npm_config\_\_roche_registry”.
-
-- Is heroku automatically seen as process.env.NODE_ENV=“production”?

@@ -23,23 +23,25 @@ const postTasksController = (req, res) => {
     req.body
   );
 
-  db.collection('tasks')
-    .add({
-      taskSummary: 'Wash dishes 10',
-      taskDetails: 'Handwash non-stick pans.',
-      contact: {
-        email: 'noemail@example.com',
-        name: 'Sunny Plant',
-        mobilePhone: '0000000000',
-      },
-    })
+  var batch = db.batch();
+  var tasksCollection = db.collection('tasks');
+  console.log('req.body', req.body);
+  req.body.forEach(task => {
+    const newDoc = tasksCollection.doc();
+    return batch.set(newDoc, task);
+  });
+  console.log({ batch });
+
+  return batch
+    .commit()
     .then(docRef => {
-      console.log('Document written with ID: ', docRef.id);
+      console.log('Document written as docRef: ', docRef);
       res.status(201).send({
-        taskId: docRef.id,
-        // TODO CAROLINE: add the rest of the entry that was posted to db
+        batch: batch,
+        // TODO CAROLINE: send something more useful
       });
     })
+
     .catch(error => {
       console.error('Error adding document: ', error);
       res.status(500).send(`Error adding document: ${error}`);
