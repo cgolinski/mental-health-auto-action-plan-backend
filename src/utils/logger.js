@@ -1,28 +1,29 @@
-const winston = require("winston");
+const winston = require('winston');
 
 // instantiate a new Winston Logger with the settings defined above
 const logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
-      level: "debug",
+      level: 'debug',
       handleExceptions: true,
       colorize: true,
       format: winston.format.combine(
         winston.format.colorize(),
         winston.format.align(),
         winston.format.simple()
-      )
-    })
-  ]
+      ),
+    }),
+  ],
 });
 
 // create a stream object with a 'write' function that will be used by `morgan`
+// set the level of detail in the logger with logger.info, logger.verbose, etc.
 logger.stream = {
-  write: (message) => {
-    logger.info(message);
-  }
+  write: message => {
+    logger.verbose(message);
+  },
 };
 
 module.exports = {
-  logger
-}
+  logger,
+};

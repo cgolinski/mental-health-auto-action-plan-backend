@@ -1,16 +1,11 @@
-const logger = require('../utils/logger');
+const { logger } = require('../utils/logger');
 
-const errorHandler = (
-  err,
-  req,
-  res,
-  next
-) => {
+const errorHandler = (err, req, res, next) => {
   logger.error(err.message);
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 };
 
 module.exports = {
-  errorHandler
-}
+  errorHandler,
+};
